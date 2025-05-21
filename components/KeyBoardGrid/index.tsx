@@ -1,10 +1,11 @@
 // app/components/KeyboardGrid.tsx
-import PinnedKeysSection from "../PinnedKeys";
-import LayoutSwitcher from "../LayoutSwitcher";
-import LayoutGrid from "../LayoutGrid";
+
 import qwertyLayouts from "@/data/QwertyLayout";
-import CopiedContent from "../CopiedContent";
 import { KeyboardProvider } from "@/context/KeyboardContext";
+import PinnedKeysSection from "@/components/PinnedKeys";
+import LayoutSwitcher from "@/components/LayoutSwitcher";
+import LayoutGrid from "@/components/LayoutGrid";
+import CopiedContent from "@/components/CopiedContent";
 
 export default function KeyboardGrid() {
   return (
