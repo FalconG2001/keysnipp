@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { ThemeProvider } from "@/providers/theme-provider";
 import { ModeToggle } from "@/components/ToggleMode";
+import DropdownSelector from "@/components/DropdownSelector";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,7 +38,8 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="font-[family-name:var(--font-geist-sans)]">
-            <div className="flex items-center justify-end p-4 bg-background text-foreground w-full">
+            <div className="flex items-center justify-end p-4 bg-background text-foreground w-full gap-5">
+              <DropdownSelector />
               <ModeToggle />
             </div>
             <main>{children}</main>
