@@ -1,6 +1,6 @@
 // app/components/KeyboardGrid.tsx
 
-import qwertyLayouts from "@/data/QwertyLayout";
+import qwertyLayouts from "@/data/utils";
 import { KeyboardProvider } from "@/context/KeyboardContext";
 import PinnedKeysSection from "@/components/PinnedKeys";
 import LayoutSwitcher from "@/components/LayoutSwitcher";

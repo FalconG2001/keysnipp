@@ -1,7 +1,6 @@
 "use client";
 import useKeyboard from "@/hooks/useKeyboard";
 import KeyButton from "@/components/KeyButton";
-import { type LayoutsKey } from "@/data/QwertyLayout";
 
 export default function LayoutGrid({
   qwertyLayouts,

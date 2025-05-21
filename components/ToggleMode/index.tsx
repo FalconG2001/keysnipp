@@ -3,22 +3,20 @@
 import * as React from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+
 import { Switch } from "@/components/ui/switch";
 
 export function ModeToggle() {
   const { theme, setTheme } = useTheme();
-  const [isMounted, setIsMounted] = React.useState(false);
+  const [isDarkMode, setIsDarkMode] = React.useState(false);
 
   React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) return null;
-
-  const isDark =
-    theme === "dark" ||
-    (theme === "system" &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches);
+    const isDark =
+      theme === "dark" ||
+      (theme === "system" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
+    setIsDarkMode(isDark);
+  }, [theme]);
 
   const handleToggle = (checked: boolean) => {
     setTheme(checked ? "dark" : "light");
@@ -28,7 +26,7 @@ export function ModeToggle() {
     <div className="flex items-center gap-2">
       <Sun className="h-4 w-4 text-muted-foreground" />
       <Switch
-        checked={isDark}
+        checked={isDarkMode}
         onCheckedChange={handleToggle}
         id="dark-mode-toggle"
       />
