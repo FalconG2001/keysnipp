@@ -1,0 +1,34 @@
+"use client";
+import useKeyboard from "@/hooks/useKeyboard";
+import KeyButton from "@/Components/KeyButton";
+import { type LayoutsKey } from "@/data/QwertyLayout";
+
+export default function LayoutGrid({
+  qwertyLayouts,
+}: {
+  qwertyLayouts: Layouts;
+}) {
+  const { layout } = useKeyboard();
+
+  return (
+    <div className="space-y-2">
+      {(Object.keys(qwertyLayouts) as LayoutsKey[]).map((layoutKey) => (
+        <div
+          key={layoutKey}
+          style={{ display: layoutKey === layout ? "block" : "none" }}
+        >
+          {qwertyLayouts[layoutKey].map((row, rowIndex) => (
+            <div
+              key={rowIndex}
+              className="flex items-center justify-center gap-5 my-6"
+            >
+              {row.map((key) => (
+                <KeyButton key={key + Math.random()} k={key} />
+              ))}
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
