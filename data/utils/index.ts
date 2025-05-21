@@ -1,24 +1,3 @@
-const qwertyLayouts = {
-  letters: [
-    ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
-    ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
-    ["z", "x", "c", "v", "b", "n", "m"],
-    [" "],
-  ],
-  numbers: [
-    ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
-    ["@", "#", "₹", "_", "&", "-", "+", "(", ")", "/"],
-    ["*", '"', "'", ":", ";", "!", "?"],
-    [" "],
-  ],
-  symbols: [
-    ["~", "`", "|", "·", "√", "π", "÷", "×", "§", "Δ"],
-    ["€", "¥", "$", "¢", "^", "°", "=", "{", "}", "\\"],
-    ["%", "©", "®", "™", "✓", "[", "]"],
-    [" "],
-  ],
-};
-
 export const sharedLayouts = [
   "QWERTY",
   "AZERTY",
@@ -29,7 +8,7 @@ export const sharedLayouts = [
   "Neo_Layout",
   "Workman",
   "Maltron",
-  "BÉPO",
+  "BEPO",
 ];
 
 export const sharedLayoutsKeys = {
@@ -62,10 +41,12 @@ export const langs = [
 
 declare global {
   type SharedLayoutsKey = keyof typeof sharedLayoutsKeys;
-  type LayoutsKey = keyof typeof qwertyLayouts;
-  type Layouts = typeof qwertyLayouts;
+  type LayoutsKey = "letters" | "numbers" | "symbols";
+  type Layouts = {
+    letters: string[][];
+    numbers: string[][];
+    symbols: string[][];
+  };
 }
 
 export type { LayoutsKey, Layouts };
-
-export default qwertyLayouts;

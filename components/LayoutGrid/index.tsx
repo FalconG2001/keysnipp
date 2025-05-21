@@ -2,21 +2,17 @@
 import useKeyboard from "@/hooks/useKeyboard";
 import KeyButton from "@/components/KeyButton";
 
-export default function LayoutGrid({
-  qwertyLayouts,
-}: {
-  qwertyLayouts: Layouts;
-}) {
+export default function LayoutGrid({ layouts }: { layouts: Layouts }) {
   const { layout } = useKeyboard();
 
   return (
     <div className="space-y-2">
-      {(Object.keys(qwertyLayouts) as LayoutsKey[]).map((layoutKey) => (
+      {(Object.keys(layouts) as LayoutsKey[]).map((layoutKey) => (
         <div
           key={layoutKey}
           style={{ display: layoutKey === layout ? "block" : "none" }}
         >
-          {qwertyLayouts[layoutKey].map((row, rowIndex) => (
+          {layouts[layoutKey].map((row, rowIndex) => (
             <div
               key={rowIndex}
               className="flex items-center justify-center gap-5 my-6"

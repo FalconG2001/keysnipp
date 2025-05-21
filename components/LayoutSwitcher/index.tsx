@@ -1,5 +1,7 @@
-// app/components/LayoutSwitcher.tsx
 "use client";
+
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 import useKeyboard from "@/hooks/useKeyboard";
 
 const layoutOptions = [
@@ -9,31 +11,25 @@ const layoutOptions = [
 ];
 
 export default function LayoutSwitcher() {
-  const { layout, handleLayoutChange, caps, handleCapsChange } = useKeyboard();
+  const { layout, handleLayoutChange } = useKeyboard();
 
   return (
-    <div className="flex space-x-2">
-      {layoutOptions.map(({ key, label }) => (
-        <button
-          key={key}
-          onClick={() => handleLayoutChange(key as LayoutsKey)}
-          className={`px-4 py-2 rounded ${
-            layout === key ? "bg-blue-500 text-white" : "bg-gray-300 text-black"
-          } cursor-pointer`}
+    <div className="flex flex-col justify-center items-center space-y-2 w-full max-w-md gap-3">
+      <div>
+        <Tabs
+          defaultValue={layout}
+          value={layout}
+          onValueChange={(value) => handleLayoutChange(value as LayoutsKey)}
         >
-          {label}
-        </button>
-      ))}
-      {layout === "letters" && (
-        <button
-          onClick={() => handleCapsChange(!caps)}
-          className={`px-4 py-2 rounded ${
-            caps ? "bg-blue-700 text-white" : "bg-gray-300 text-black"
-          } cursor-pointer`}
-        >
-          {caps ? "CAPS ON" : "caps off"}
-        </button>
-      )}
+          <TabsList className="grid grid-cols-3">
+            {layoutOptions.map(({ key, label }) => (
+              <TabsTrigger key={key} value={key} className="cursor-pointer">
+                {label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </Tabs>
+      </div>
     </div>
   );
 }
