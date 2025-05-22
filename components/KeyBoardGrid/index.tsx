@@ -2,11 +2,11 @@
 
 import { sharedLayoutsKeys } from "@/data/utils";
 import { KeyboardProvider } from "@/context/KeyboardContext";
-import PinnedKeysSection from "@/components/PinnedKeys";
 import LayoutSwitcher from "@/components/LayoutSwitcher";
 import LayoutGrid from "@/components/LayoutGrid";
 import CopiedContent from "@/components/CopiedContent";
 import { notFound } from "next/navigation";
+import KeyGridSection from "../PinnedKeys";
 
 export default async function KeyboardGrid({
   lang,
@@ -44,13 +44,23 @@ export default async function KeyboardGrid({
   }
 
   return (
-    <div className="flex flex-col items-center p-4 space-y-4 w-full overflow-hidden min-h-screen transition-all duration-300 ease-in-out">
-      <KeyboardProvider>
-        <PinnedKeysSection />
-        <LayoutSwitcher />
-        <LayoutGrid layouts={layouts} />
+    <KeyboardProvider>
+      <div className="flex flex-col items-center p-4 space-y-4 w-full overflow-hidden min-h-screen transition-all duration-300 ease-in-out">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 w-full">
+          <div className="md:col-span-3 h-full">
+            <KeyGridSection type="recents" />
+          </div>
+          <div className="md:col-span-9 h-full">
+            <KeyGridSection type="pinned" />
+          </div>
+        </div>
+
+        <div className="w-full h-full flex items-center justify-center flex-col border border-dashed border-yellow-300">
+          <LayoutSwitcher />
+          <LayoutGrid layouts={layouts} />
+        </div>
         <CopiedContent />
-      </KeyboardProvider>
-    </div>
+      </div>
+    </KeyboardProvider>
   );
 }

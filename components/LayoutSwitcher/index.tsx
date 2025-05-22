@@ -14,7 +14,7 @@ export default function LayoutSwitcher() {
   const { layout, handleLayoutChange } = useKeyboard();
 
   return (
-    <div className="flex flex-col justify-center items-center space-y-2 w-full max-w-md gap-3">
+    <div className="py-4 flex flex-col justify-center items-center space-y-2 w-full max-w-md gap-3">
       <div>
         <Tabs
           defaultValue={layout}

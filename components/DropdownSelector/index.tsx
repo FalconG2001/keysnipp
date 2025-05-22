@@ -44,7 +44,7 @@ export default function DropdownSelector() {
   };
 
   return (
-    <div className="flex gap-4">
+    <div className="flex flex-wrap gap-4 w-full sm:w-auto flex-col lg:flex-row justify-center items-center my-5">
       {/* Layout Dropdown */}
       <Popover open={layoutOpen} onOpenChange={setLayoutOpen}>
         <PopoverTrigger asChild>
@@ -52,7 +52,7 @@ export default function DropdownSelector() {
             variant="outline"
             role="combobox"
             aria-expanded={layoutOpen}
-            className="w-[180px] justify-between"
+            className="w-[180px] min-w-[140px] justify-between"
           >
             {currentLayout ? currentLayout : "Choose Layout"}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -95,7 +95,7 @@ export default function DropdownSelector() {
             variant="outline"
             role="combobox"
             aria-expanded={langOpen}
-            className="w-[180px] justify-between"
+            className="sm:w-[180px] min-w-[140px] justify-between"
           >
             {currentLang ? currentLang : "Choose Language"}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />

@@ -33,15 +33,16 @@ export default function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
-          <div className="font-[family-name:var(--font-geist-sans)]">
-            <div className="flex items-center justify-end p-4 bg-background text-foreground w-full gap-5">
-              <DropdownSelector />
+          <div className="font-[family-name:var(--font-geist-sans)] max-w-screen-xl w-full px-4 mx-auto">
+            <div className="flex items-center justify-end gap-4 p-4 bg-background text-foreground">
               <ModeToggle />
             </div>
+            <DropdownSelector />
+
             <main>{children}</main>
           </div>
         </ThemeProvider>

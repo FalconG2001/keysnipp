@@ -11,11 +11,12 @@ export default function LayoutGrid({ layouts }: { layouts: Layouts }) {
         <div
           key={layoutKey}
           style={{ display: layoutKey === layout ? "block" : "none" }}
+          className="w-full"
         >
           {layouts[layoutKey].map((row, rowIndex) => (
             <div
               key={rowIndex}
-              className="flex items-center justify-center gap-5 my-6"
+              className="flex flex-wrap items-center justify-center gap-5 my-6 mx-auto"
             >
               {row.map((key) => (
                 <KeyButton key={key + Math.random()} k={key} />

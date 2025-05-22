@@ -12,6 +12,9 @@ interface KeyboardContextProps {
   favorites: string[];
   toggleFavorite: (key: string) => void;
   isFavorite: (key: string) => boolean;
+  clearFavorites: () => void;
+  recents: string[];
+  clearRecents: () => void;
 }
 
 const defaultContext: KeyboardContextProps = {
@@ -24,6 +27,9 @@ const defaultContext: KeyboardContextProps = {
   favorites: [],
   toggleFavorite: () => {},
   isFavorite: () => false,
+  clearFavorites: () => {},
+  recents: [],
+  clearRecents: () => {},
 };
 
 export const KeyboardContext =
@@ -38,6 +44,15 @@ export const KeyboardProvider = ({
   const [caps, setCaps] = useState(false);
   const [copied, setCopied] = useState("");
   const [favorites, setFavorites] = useState<string[]>([]);
+  const [recents, setRecents] = useState<string[]>([]);
+
+  const updateRecents = (key: string) => {
+    setRecents((prev) => {
+      const filtered = prev.filter((k) => k !== key);
+      const newList = [key, ...filtered];
+      return newList.slice(0, 5);
+    });
+  };
 
   const handleCopy = useCallback(
     (key: string) => {
@@ -45,6 +60,7 @@ export const KeyboardProvider = ({
       const finalKey = caps && layout === "letters" ? key.toUpperCase() : key;
       navigator.clipboard.writeText(finalKey);
       setCopied(finalKey);
+      updateRecents(finalKey);
       setTimeout(() => setCopied(""), 2000);
     },
     [caps, layout]
@@ -69,14 +85,30 @@ export const KeyboardProvider = ({
     );
   }, []);
 
-  useEffect(() => {
-    const favs = localStorage.getItem("favorites");
-    if (favs) setFavorites(JSON.parse(favs));
+  const clearFavorites = useCallback(() => {
+    setFavorites([]);
   }, []);
 
+  const clearRecents = useCallback(() => {
+    setRecents([]);
+  }, []);
+
+  // Load from localStorage
+  useEffect(() => {
+    const favs = localStorage.getItem("favorites");
+    const recent = localStorage.getItem("recents");
+    if (favs) setFavorites(JSON.parse(favs));
+    if (recent) setRecents(JSON.parse(recent));
+  }, []);
+
+  // Store favorites + recents
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
+
+  useEffect(() => {
+    localStorage.setItem("recents", JSON.stringify(recents));
+  }, [recents]);
 
   return (
     <KeyboardContext.Provider
@@ -90,6 +122,9 @@ export const KeyboardProvider = ({
         favorites,
         toggleFavorite,
         isFavorite,
+        recents,
+        clearFavorites,
+        clearRecents,
       }}
     >
       {children}
