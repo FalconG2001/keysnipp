@@ -22,6 +22,7 @@ const Logo = () => {
         src={dark ? icon_dark : icon_light}
         alt="Logo"
         className="w-16 h-auto"
+        priority
       />
       <span className="text-accent-foreground text-2xl">KeySnipp</span>
     </Link>
