@@ -2,6 +2,8 @@
 
 import { createContext, useState, useEffect, useCallback } from "react";
 
+import { toast } from "sonner";
+
 interface KeyboardContextProps {
   layout: LayoutsKey;
   handleLayoutChange: (layout: LayoutsKey) => void;
@@ -80,9 +82,19 @@ export const KeyboardProvider = ({
   );
 
   const toggleFavorite = useCallback((key: string) => {
-    setFavorites((prev) =>
-      prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]
-    );
+    setFavorites((prev) => {
+      const already = prev.includes(key);
+      if (already) return prev.filter((k) => k !== key);
+
+      if (prev.length >= 15) {
+        toast.error(
+          "You can pin up to 15 keys only. Unpin one to add another."
+        );
+        return prev;
+      }
+
+      return [...prev, key];
+    });
   }, []);
 
   const clearFavorites = useCallback(() => {

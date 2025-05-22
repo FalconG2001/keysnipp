@@ -5,6 +5,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { ModeToggle } from "@/components/ToggleMode";
 import DropdownSelector from "@/components/DropdownSelector";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,6 +38,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Toaster />
           <div className="font-[family-name:var(--font-geist-sans)] max-w-screen-xl w-full px-4 mx-auto">
             <div className="flex items-center justify-end gap-4 p-4 bg-background text-foreground">
               <ModeToggle />
