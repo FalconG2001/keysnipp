@@ -1,12 +1,13 @@
 // app/components/KeyboardGrid.tsx
+import { notFound } from "next/navigation";
 
-import { sharedLayoutsKeys } from "@/data/utils";
-import { KeyboardProvider } from "@/context/KeyboardContext";
 import LayoutSwitcher from "@/components/LayoutSwitcher";
 import LayoutGrid from "@/components/LayoutGrid";
-import CopiedContent from "@/components/CopiedContent";
-import { notFound } from "next/navigation";
 import KeyGridSection from "../PinnedKeys";
+
+import { KeyboardProvider } from "@/context/KeyboardContext";
+
+import { sharedLayoutsKeys } from "@/data/utils";
 
 export default async function KeyboardGrid({
   lang,
@@ -59,7 +60,6 @@ export default async function KeyboardGrid({
           <LayoutSwitcher />
           <LayoutGrid layouts={layouts} />
         </div>
-        <CopiedContent />
       </div>
     </KeyboardProvider>
   );

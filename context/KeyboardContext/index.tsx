@@ -62,6 +62,7 @@ export const KeyboardProvider = ({
       const finalKey = caps && layout === "letters" ? key.toUpperCase() : key;
       navigator.clipboard.writeText(finalKey);
       setCopied(finalKey);
+      toast.success(`Copied '${finalKey}'`, { position: "top-center" });
       updateRecents(finalKey);
       setTimeout(() => setCopied(""), 2000);
     },

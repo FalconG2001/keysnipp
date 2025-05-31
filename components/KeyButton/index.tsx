@@ -1,6 +1,6 @@
 // app/components/KeyButton.tsx
 "use client";
-import { Star, StarOff } from "lucide-react";
+import { Star, StarOff, Check } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -14,6 +14,7 @@ export default function KeyButton({
   type?: "normal" | "pinned";
 }) {
   const {
+    copied,
     caps,
     layout,
     handleCopy,
@@ -49,7 +50,15 @@ export default function KeyButton({
             onClick={() => handleCopy(displayKey)}
             className={btnStyle}
           >
-            {k === " " ? <span className="text-sm">[Space]</span> : displayKey}
+            {copied === "" || copied !== displayKey || type === "pinned" ? (
+              k === " " ? (
+                <span className="text-sm">[Space]</span>
+              ) : (
+                displayKey
+              )
+            ) : (
+              <Check size={16} />
+            )}
           </Button>
           <button
             onClick={(e) => {
